@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitepress'
 
 export default defineConfig({
+  base: '/javascript-learn/',
   lang: 'zh-CN',
   title: 'JavaScript 系统学习路径',
   description: '一套由浅入深、项目驱动的 JavaScript 学习路线，专为完全零基础初学者设计。',
