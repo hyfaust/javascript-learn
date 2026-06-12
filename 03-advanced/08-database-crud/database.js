@@ -13,10 +13,16 @@ const path = require('path');
 
 // === 1. Create / Open Database ===
 const DB_PATH = path.join(__dirname, 'todos.db');
-const db = new Database(DB_PATH);
+let db;
 
-// Enable WAL mode for better concurrent read performance
-db.pragma('journal_mode = WAL');
+try {
+  db = new Database(DB_PATH);
+  // Enable WAL mode for better concurrent read performance
+  db.pragma('journal_mode = WAL');
+} catch (err) {
+  console.error('Failed to open database:', err.message);
+  process.exit(1);
+}
 
 // Prepared statements (created after table exists)
 let stmts = null;

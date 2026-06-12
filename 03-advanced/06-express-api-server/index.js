@@ -59,7 +59,27 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 // === 6. Start Server ===
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`Notes API server running at http://localhost:${PORT}`);
   console.log('Press Ctrl+C to stop');
+});
+
+// Handle listen errors (e.g. EADDRINUSE)
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Error: Port ${PORT} is already in use.`);
+    console.error('Try a different port: PORT=3001 node index.js');
+  } else {
+    console.error('Server error:', err.message);
+  }
+  process.exit(1);
+});
+
+// Graceful shutdown
+process.on('SIGINT', () => {
+  console.log('\nShutting down...');
+  server.close(() => {
+    console.log('Server closed.');
+    process.exit(0);
+  });
 });

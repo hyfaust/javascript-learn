@@ -16,11 +16,18 @@ db.init();
 
 const PORT = process.env.PORT || 3000;
 
-// Parse JSON body from request
+// Parse JSON body from request (with size limit)
 function parseBody(req) {
   return new Promise((resolve, reject) => {
     let body = '';
-    req.on('data', (chunk) => (body += chunk));
+    const MAX_BODY_SIZE = 1024 * 1024; // 1MB
+    req.on('data', (chunk) => {
+      body += chunk;
+      if (body.length > MAX_BODY_SIZE) {
+        req.destroy();
+        reject(new Error('Request body too large'));
+      }
+    });
     req.on('end', () => {
       try {
         resolve(body ? JSON.parse(body) : {});
@@ -119,9 +126,24 @@ server.listen(PORT, () => {
   console.log('Press Ctrl+C to stop');
 });
 
+// Handle listen errors (e.g. EADDRINUSE)
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Error: Port ${PORT} is already in use.`);
+    console.error('Try a different port: PORT=3001 node server.js');
+  } else {
+    console.error('Server error:', err.message);
+  }
+  db.close();
+  process.exit(1);
+});
+
 // Graceful shutdown
 process.on('SIGINT', () => {
+  console.log('\nShutting down...');
   db.close();
-  server.close();
-  process.exit(0);
+  server.close(() => {
+    console.log('Server closed.');
+    process.exit(0);
+  });
 });

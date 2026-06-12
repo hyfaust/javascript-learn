@@ -16,19 +16,25 @@ const { WebSocketServer } = require('ws');
 
 // === 1. HTTP Server (serves the client page) ===
 const server = http.createServer((req, res) => {
-  if (req.url === '/' || req.url === '/index.html') {
-    const filePath = path.join(__dirname, 'index.html');
-    const content = fs.readFileSync(filePath, 'utf-8');
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
-    res.end(content);
-  } else if (req.url === '/style.css') {
-    const filePath = path.join(__dirname, 'style.css');
-    const content = fs.readFileSync(filePath, 'utf-8');
-    res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
-    res.end(content);
-  } else {
-    res.writeHead(404);
-    res.end('Not Found');
+  try {
+    if (req.url === '/' || req.url === '/index.html') {
+      const filePath = path.join(__dirname, 'index.html');
+      const content = fs.readFileSync(filePath, 'utf-8');
+      res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
+      res.end(content);
+    } else if (req.url === '/style.css') {
+      const filePath = path.join(__dirname, 'style.css');
+      const content = fs.readFileSync(filePath, 'utf-8');
+      res.writeHead(200, { 'Content-Type': 'text/css; charset=utf-8' });
+      res.end(content);
+    } else {
+      res.writeHead(404);
+      res.end('Not Found');
+    }
+  } catch (err) {
+    console.error('Request handler error:', err.message);
+    res.writeHead(500);
+    res.end('Internal Server Error');
   }
 });
 
@@ -114,4 +120,30 @@ server.listen(PORT, () => {
   console.log(`Chat server running at http://localhost:${PORT}`);
   console.log('Open the URL in multiple browser tabs to test');
   console.log('Press Ctrl+C to stop');
+});
+
+// Handle listen errors (e.g. EADDRINUSE)
+server.on('error', (err) => {
+  if (err.code === 'EADDRINUSE') {
+    console.error(`Error: Port ${PORT} is already in use.`);
+    console.error('Try a different port: PORT=3001 node server.js');
+  } else {
+    console.error('Server error:', err.message);
+  }
+  process.exit(1);
+});
+
+// Graceful shutdown
+process.on('SIGINT', () => {
+  console.log('\nShutting down...');
+  // Close all WebSocket connections
+  for (const client of clients) {
+    client.close();
+  }
+  wss.close(() => {
+    server.close(() => {
+      console.log('Server closed.');
+      process.exit(0);
+    });
+  });
 });

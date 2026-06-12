@@ -150,4 +150,12 @@ main().catch((err) => {
   console.error('Error:', err.message);
   db.close();
   rl.close();
+  process.exit(1);
+});
+
+// Ensure DB is closed on unexpected exit
+process.on('SIGINT', () => {
+  db.close();
+  rl.close();
+  process.exit(0);
 });
