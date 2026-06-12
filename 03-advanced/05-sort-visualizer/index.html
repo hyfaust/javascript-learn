@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>排序算法可视化</title>
+    <!-- 引入外部样式表 -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 页面标题区域 -->
+    <header>
+        <h1>排序算法可视化</h1>
+        <p class="subtitle">观察不同排序算法如何一步步将数组排序</p>
+    </header>
+
+    <!-- 控制面板区域 -->
+    <div class="controls">
+        <!-- 算法选择器 -->
+        <div class="control-group">
+            <label for="algorithm-select">选择算法：</label>
+            <select id="algorithm-select">
+                <option value="bubble">冒泡排序 (Bubble Sort)</option>
+                <option value="selection">选择排序 (Selection Sort)</option>
+                <option value="insertion">插入排序 (Insertion Sort)</option>
+                <option value="quick">快速排序 (Quick Sort)</option>
+            </select>
+        </div>
+
+        <!-- 数组大小滑块 -->
+        <div class="control-group">
+            <label for="array-size">数组大小：<span id="array-size-value">30</span></label>
+            <input type="range" id="array-size" min="10" max="100" value="30">
+        </div>
+
+        <!-- 排序速度滑块 -->
+        <div class="control-group">
+            <label for="speed-range">排序速度：<span id="speed-value">50</span>ms</label>
+            <input type="range" id="speed-range" min="1" max="200" value="50">
+        </div>
+
+        <!-- 操作按钮 -->
+        <div class="control-group buttons">
+            <button id="generate-btn" class="btn btn-primary">🎲 生成新数组</button>
+            <button id="sort-btn" class="btn btn-success">▶️ 开始排序</button>
+            <button id="reset-btn" class="btn btn-warning">🔄 重置</button>
+        </div>
+    </div>
+
+    <!-- 算法状态信息 -->
+    <div class="status-bar">
+        <span id="algorithm-name">当前算法：-</span>
+        <span id="comparison-count">比较次数：0</span>
+        <span id="swap-count">交换次数：0</span>
+        <span id="sorting-status">状态：就绪</span>
+    </div>
+
+    <!-- 可视化柱状图区域 -->
+    <main id="visualizer-container">
+        <!-- 柱子由 JavaScript 动态生成 -->
+    </main>
+
+    <!-- 图例说明 -->
+    <div class="legend">
+        <h3>颜色图例：</h3>
+        <div class="legend-item">
+            <div class="legend-color unsorted"></div>
+            <span>未排序 (蓝色)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color comparing"></div>
+            <span>比较中 (黄色)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color swapping"></div>
+            <span>交换中 (红色)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color sorted"></div>
+            <span>已排序 (绿色)</span>
+        </div>
+        <div class="legend-item">
+            <div class="legend-color pivot"></div>
+            <span>基准值 (紫色 - 快速排序)</span>
+        </div>
+    </div>
+
+    <!-- 引入外部 JavaScript 文件 -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "file-renamer-tool",
+  "version": "1.0.0",
+  "description": "一个基于 Node.js 的命令行文件批量重命名工具",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "rename": "node index.js rename",
+    "info": "node index.js info",
+    "help": "node index.js help",
+    "test": "echo \"运行 node index.js help 查看使用说明\""
+  },
+  "keywords": [
+    "cli",
+    "rename",
+    "file",
+    "tool",
+    "nodejs"
+  ],
+  "author": "",
+  "license": "MIT"
+}

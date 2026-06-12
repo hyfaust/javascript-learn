@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #00ff88;
+}
+
+.container {
+    text-align: center;
+    padding: 40px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    border: 2px solid rgba(0, 255, 136, 0.3);
+    box-shadow: 0 0 40px rgba(0, 255, 136, 0.1);
+}
+
+h1 {
+    color: #00ff88;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+/* 时间显示 */
+.clock-display {
+    margin-bottom: 30px;
+}
+
+.time {
+    font-size: 80px;
+    font-weight: bold;
+    letter-spacing: 8px;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px rgba(0, 255, 136, 0.3); }
+    to { text-shadow: 0 0 30px rgba(0, 255, 136, 0.8); }
+}
+
+.period {
+    font-size: 24px;
+    color: #888;
+    margin-top: 10px;
+}
+
+.date {
+    font-size: 18px;
+    color: #666;
+    margin-top: 10px;
+}
+
+/* 控制按钮 */
+.controls {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.controls button {
+    padding: 12px 24px;
+    background: transparent;
+    border: 2px solid #00ff88;
+    color: #00ff88;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.3s;
+}
+
+.controls button:hover {
+    background: rgba(0, 255, 136, 0.1);
+    transform: scale(1.05);
+}
+
+.controls button:active {
+    transform: scale(0.95);
+}
+
+.controls button.stopped {
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+}
+
+/* 秒针进度条 */
+.seconds-bar {
+    width: 100%;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff88, #00ccff);
+    transition: width 0.1s linear;
+    width: 0%;
+}

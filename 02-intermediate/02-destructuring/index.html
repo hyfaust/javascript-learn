@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES6 解构赋值交互式学习</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ES6 解构赋值 (Destructuring)</h1>
+        <p class="subtitle">交互式学习数组、对象和函数参数的解构语法</p>
+    </header>
+
+    <main>
+        <!-- 数组解构部分 -->
+        <section class="demo-section">
+            <h2>一、数组解构</h2>
+
+            <!-- 基础数组解构 -->
+            <div class="demo-card">
+                <h3>1. 基础数组解构</h3>
+                <p class="description">按位置将数组元素赋值给变量</p>
+                <div class="code-block">
+                    <pre>const arr = ["苹果", "香蕉", "橙子"];
+const [first, second, third] = arr;</pre>
+                </div>
+                <button class="run-btn" onclick="runBasicArray()">运行演示</button>
+                <div class="result" id="basic-array-result"></div>
+            </div>
+
+            <!-- 跳过元素 -->
+            <div class="demo-card">
+                <h3>2. 跳过元素</h3>
+                <p class="description">使用逗号跳过不需要的元素</p>
+                <div class="code-block">
+                    <pre>const arr = [1, 2, 3, 4, 5];
+const [first, , third, , fifth] = arr;</pre>
+                </div>
+                <button class="run-btn" onclick="runSkipElements()">运行演示</button>
+                <div class="result" id="skip-result"></div>
+            </div>
+
+            <!-- Rest 剩余元素 -->
+            <div class="demo-card">
+                <h3>3. Rest 剩余元素</h3>
+                <p class="description">使用 ... 收集剩余的所有元素</p>
+                <div class="code-block">
+                    <pre>const arr = ["HTML", "CSS", "JavaScript", "React", "Vue"];
+const [first, second, ...rest] = arr;</pre>
+                </div>
+                <button class="run-btn" onclick="runRest()">运行演示</button>
+                <div class="result" id="rest-result"></div>
+            </div>
+
+            <!-- 交换变量 -->
+            <div class="demo-card">
+                <h3>4. 交换变量值</h3>
+                <p class="description">无需临时变量即可交换两个变量的值</p>
+                <div class="code-block">
+                    <pre>let a = 10, b = 20;
+[a, b] = [b, a];</pre>
+                </div>
+                <button class="run-btn" onclick="runSwap()">运行演示</button>
+                <div class="result" id="swap-result"></div>
+            </div>
+        </section>
+
+        <!-- 对象解构部分 -->
+        <section class="demo-section">
+            <h2>二、对象解构</h2>
+
+            <!-- 基础对象解构 -->
+            <div class="demo-card">
+                <h3>1. 基础对象解构</h3>
+                <p class="description">按属性名从对象中提取值</p>
+                <div class="code-block">
+                    <pre>const person = { name: "张三", age: 25, city: "北京" };
+const { name, age, city } = person;</pre>
+                </div>
+                <button class="run-btn" onclick="runBasicObject()">运行演示</button>
+                <div class="result" id="basic-object-result"></div>
+            </div>
+
+            <!-- 重命名变量 -->
+            <div class="demo-card">
+                <h3>2. 重命名变量</h3>
+                <p class="description">使用冒号语法将属性名赋值给不同的变量名</p>
+                <div class="code-block">
+                    <pre>const book = { title: "JavaScript指南", author: "李四" };
+const { title: bookTitle, author: bookAuthor } = book;</pre>
+                </div>
+                <button class="run-btn" onclick="runRename()">运行演示</button>
+                <div class="result" id="rename-result"></div>
+            </div>
+
+            <!-- 默认值 -->
+            <div class="demo-card">
+                <h3>3. 设置默认值</h3>
+                <p class="description">当属性不存在时使用默认值</p>
+                <div class="code-block">
+                    <pre>const user = { username: "admin" };
+const { username, role = "用户", status = "在线" } = user;</pre>
+                </div>
+                <button class="run-btn" onclick="runDefaults()">运行演示</button>
+                <div class="result" id="defaults-result"></div>
+            </div>
+
+            <!-- 嵌套解构 -->
+            <div class="demo-card">
+                <h3>4. 嵌套对象解构</h3>
+                <p class="description">从嵌套的对象结构中提取深层值</p>
+                <div class="code-block">
+                    <pre>const student = {
+    name: "王五",
+    scores: { math: 95, english: 88 },
+    contact: { email: "wangwu@example.com" }
+};
+const { name, scores: { math, english }, contact: { email } } = student;</pre>
+                </div>
+                <button class="run-btn" onclick="runNested()">运行演示</button>
+                <div class="result" id="nested-result"></div>
+            </div>
+        </section>
+
+        <!-- 函数参数解构部分 -->
+        <section class="demo-section">
+            <h2>三、函数参数解构</h2>
+
+            <!-- 对象参数解构 -->
+            <div class="demo-card">
+                <h3>1. 对象参数解构</h3>
+                <p class="description">直接在函数参数中解构对象</p>
+                <div class="code-block">
+                    <pre>function greet({ name, age, greeting = "你好" }) {
+    return `${greeting}，我是${name}，今年${age}岁`;
+}
+greet({ name: "赵六", age: 30 });</pre>
+                </div>
+                <button class="run-btn" onclick="runFnObjectParam()">运行演示</button>
+                <div class="result" id="fn-object-result"></div>
+            </div>
+
+            <!-- 数组参数解构 -->
+            <div class="demo-card">
+                <h3>2. 数组参数解构</h3>
+                <p class="description">直接在函数参数中解构数组</p>
+                <div class="code-block">
+                    <pre>function getDistance([x1, y1], [x2, y2]) {
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    return Math.sqrt(dx * dx + dy * dy);
+}
+getDistance([0, 0], [3, 4]);</pre>
+                </div>
+                <button class="run-btn" onclick="runFnArrayParam()">运行演示</button>
+                <div class="result" id="fn-array-result"></div>
+            </div>
+        </section>
+
+        <!-- 综合练习区 -->
+        <section class="demo-section">
+            <h2>四、互动练习区</h2>
+            <div class="demo-card interactive">
+                <h3>自定义解构练习</h3>
+                <p class="description">输入数据并选择解构方式，实时查看结果</p>
+
+                <div class="input-group">
+                    <label>选择类型：</label>
+                    <select id="destructure-type" onchange="updateInput()">
+                        <option value="array">数组解构</option>
+                        <option value="object">对象解构</option>
+                    </select>
+                </div>
+
+                <div id="array-input-group" class="input-group">
+                    <label>输入数组（用逗号分隔）：</label>
+                    <input type="text" id="array-input" value="苹果, 香蕉, 橙子, 葡萄, 西瓜" placeholder="例如：a, b, c, d">
+                </div>
+
+                <div id="object-input-group" class="input-group" style="display:none;">
+                    <label>输入对象属性（格式 key:value，用分号分隔）：</label>
+                    <input type="text" id="object-input" value="name:小明; age:18; hobby:编程; city:上海" placeholder="例如：name:张三; age:20">
+                </div>
+
+                <button class="run-btn" onclick="runCustomDestruct()">执行解构</button>
+                <div class="result" id="custom-result"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>ES6 解构赋值交互式学习 | 动手实践，深入理解</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

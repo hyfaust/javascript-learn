@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组方法实验室</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 数组方法实验室</h1>
+        <p class="subtitle">交互式学习 JavaScript 数组核心方法</p>
+
+        <!-- 数据展示区 -->
+        <div class="data-section">
+            <h2>示例数据</h2>
+            <div class="data-box">
+                <div class="data-item">
+                    <strong>数字数组:</strong>
+                    <code id="numbersData"></code>
+                </div>
+                <div class="data-item">
+                    <strong>对象数组 (学生):</strong>
+                    <code id="studentsData"></code>
+                </div>
+            </div>
+        </div>
+
+        <!-- 方法操作区 -->
+        <div class="methods-section">
+            <h2>数组方法</h2>
+            <div class="method-buttons">
+                <button class="method-btn" data-method="map">map() - 映射</button>
+                <button class="method-btn" data-method="filter">filter() - 过滤</button>
+                <button class="method-btn" data-method="reduce">reduce() - 归约</button>
+                <button class="method-btn" data-method="sort">sort() - 排序</button>
+                <button class="method-btn" data-method="find">find() - 查找</button>
+                <button class="method-btn" data-method="some">some() - 部分匹配</button>
+                <button class="method-btn" data-method="every">every() - 全部匹配</button>
+                <button class="method-btn" data-method="includes">includes() - 包含</button>
+                <button class="method-btn" data-method="flat">flat() - 展平</button>
+            </div>
+        </div>
+
+        <!-- 结果显示区 -->
+        <div class="result-section">
+            <h2>结果</h2>
+            <div id="result" class="result-box">点击上方按钮查看结果...</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

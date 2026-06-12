@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态时钟</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>⏰ 动态时钟</h1>
+        
+        <!-- 时间显示区域 -->
+        <div class="clock-display">
+            <div id="time" class="time">00:00:00</div>
+            <div id="period" class="period"></div>
+            <div id="date" class="date"></div>
+        </div>
+
+        <!-- 控制按钮 -->
+        <div class="controls">
+            <button id="formatBtn">切换 12/24 小时制</button>
+            <button id="stopBtn">暂停</button>
+        </div>
+
+        <!-- 秒针进度条 -->
+        <div class="seconds-bar">
+            <div id="secondsBar" class="bar-fill"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

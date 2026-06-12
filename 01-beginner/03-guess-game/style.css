@@ -1,0 +1,362 @@
+/**
+ * 猜数字游戏 - 样式表
+ * 
+ * 设计理念：色彩丰富、有趣、适合初学者
+ * 包含动画效果：正确猜测时会有庆祝动画
+ */
+
+/* ============================================================
+   第 1 部分：全局样式
+   ============================================================ */
+
+/* 
+ * 通配符选择器 *
+ * 对所有元素应用这些样式
+ * box-sizing: border-box 让元素的宽高包含 padding 和 border
+ * 这样计算布局更直观
+ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 
+ * body 样式
+ * 使用渐变背景，让页面看起来更生动
+ */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;  /* 最小高度为视口高度 */
+  display: flex;
+  justify-content: center;  /* 水平居中 */
+  align-items: center;      /* 垂直居中 */
+  padding: 20px;
+}
+
+/* ============================================================
+   第 2 部分：游戏容器
+   ============================================================ */
+
+/* 
+ * 游戏主容器
+ * 白色背景、圆角、阴影，形成卡片效果
+ */
+.game-container {
+  background: #ffffff;
+  border-radius: 20px;  /* 圆角半径 */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);  /* 阴影效果 */
+  padding: 40px;
+  max-width: 500px;  /* 最大宽度 */
+  width: 100%;
+  text-align: center;  /* 文字居中 */
+}
+
+/* ============================================================
+   第 3 部分：标题样式
+   ============================================================ */
+
+/* 游戏主标题 */
+.game-title {
+  color: #4a5568;
+  font-size: 2.5rem;  /* rem 是相对于根元素字体大小的单位 */
+  margin-bottom: 10px;
+}
+
+/* 副标题 */
+.subtitle {
+  color: #718096;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+/* ============================================================
+   第 4 部分：游戏区域
+   ============================================================ */
+
+/* 游戏主区域 */
+.game-area {
+  background: #f7fafc;
+  border-radius: 15px;
+  padding: 30px;
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   第 5 部分：输入区域
+   ============================================================ */
+
+/* 输入区域的布局 */
+.input-section {
+  display: flex;
+  flex-wrap: wrap;  /* 允许换行 */
+  gap: 10px;        /* 元素之间的间距 */
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* 输入标签 */
+.input-section label {
+  font-weight: bold;
+  color: #4a5568;
+}
+
+/* 
+ * 数字输入框
+ * 移除默认的箭头按钮，使用自定义样式
+ */
+#guess-input {
+  width: 120px;
+  padding: 12px 15px;
+  font-size: 1.2rem;
+  border: 3px solid #e2e8f0;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;  /* 平滑过渡动画 */
+}
+
+/* 输入框获得焦点时的样式 */
+#guess-input:focus {
+  outline: none;  /* 移除默认的轮廓 */
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);  /* 发光效果 */
+}
+
+/* ============================================================
+   第 6 部分：按钮样式
+   ============================================================ */
+
+/* 通用按钮样式 */
+.btn {
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;  /* 鼠标悬停时显示手型 */
+  transition: all 0.3s ease;  /* 平滑过渡 */
+}
+
+/* 主要按钮（猜测按钮） */
+.primary-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+/* 主要按钮悬停效果 */
+.primary-btn:hover {
+  transform: translateY(-2px);  /* 向上移动 2px */
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* 按钮按下效果 */
+.primary-btn:active {
+  transform: translateY(0);  /* 回到原位 */
+}
+
+/* 重新开始按钮 */
+.restart-btn {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.restart-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+}
+
+/* ============================================================
+   第 7 部分：消息显示区域
+   ============================================================ */
+
+/* 消息框基础样式 */
+.message {
+  min-height: 50px;  /* 最小高度，防止内容变化时页面跳动 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+/* 
+ * 不同状态的消息样式
+ * 使用 CSS 类来区分不同状态
+ */
+
+/* 默认状态：等待输入 */
+.message.wait {
+  background: #edf2f7;
+  color: #718096;
+}
+
+/* 猜小了 */
+.message.too-low {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #c05621;
+  animation: shake 0.5s;  /* 抖动动画 */
+}
+
+/* 猜大了 */
+.message.too-high {
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+  color: #2b6cb0;
+  animation: shake 0.5s;  /* 抖动动画 */
+}
+
+/* 猜对了！ */
+.message.correct {
+  background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+  color: #276749;
+  animation: celebrate 1s;  /* 庆祝动画 */
+}
+
+/* 输入无效 */
+.message.invalid {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  color: #c53030;
+}
+
+/* ============================================================
+   第 8 部分：动画定义
+   ============================================================ */
+
+/* 
+ * @keyframes 定义动画
+ * 语法：@keyframes 动画名 { from { 样式 } to { 样式 } }
+ * 或者使用百分比：0% { 样式 } 50% { 样式 } 100% { 样式 }
+ */
+
+/* 抖动动画 - 用于猜错时的提示 */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-10px); }
+  40% { transform: translateX(10px); }
+  60% { transform: translateX(-10px); }
+  80% { transform: translateX(10px); }
+}
+
+/* 庆祝动画 - 用于猜对时的效果 */
+@keyframes celebrate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* ============================================================
+   第 9 部分：尝试次数显示
+   ============================================================ */
+
+/* 尝试次数区域 */
+.attempts-section {
+  font-size: 1.1rem;
+  color: #4a5568;
+  margin-bottom: 20px;
+}
+
+/* 尝试次数数字 */
+.attempts-count {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #667eea;
+}
+
+/* ============================================================
+   第 10 部分：猜测历史
+   ============================================================ */
+
+/* 历史区域标题 */
+.history-section h3 {
+  color: #4a5568;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+/* 历史记录容器 */
+.guess-history {
+  background: #edf2f7;
+  border-radius: 10px;
+  padding: 15px;
+  max-height: 150px;  /* 最大高度 */
+  overflow-y: auto;   /* 内容过多时显示垂直滚动条 */
+}
+
+/* 单条历史记录 */
+.history-item {
+  display: flex;
+  justify-content: space-between;  /* 两端对齐 */
+  align-items: center;
+  padding: 8px 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+}
+
+/* 猜小了的记录 */
+.history-item.low {
+  background: #feebc8;
+  color: #c05621;
+}
+
+/* 猜大了的记录 */
+.history-item.high {
+  background: #bee3f8;
+  color: #2b6cb0;
+}
+
+/* 猜中的记录 */
+.history-item.correct {
+  background: #c6f6d5;
+  color: #276749;
+  font-weight: bold;
+}
+
+/* 没有历史记录时的提示 */
+.no-history {
+  color: #a0aec0;
+  font-style: italic;  /* 斜体 */
+}
+
+/* ============================================================
+   第 11 部分：游戏说明
+   ============================================================ */
+
+/* 说明区域 */
+.instructions {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: left;  /* 文字左对齐 */
+}
+
+.instructions h3 {
+  color: #4a5568;
+  margin-bottom: 10px;
+}
+
+.instructions ul {
+  list-style-position: inside;  /* 列表标记在内部 */
+  color: #718096;
+}
+
+.instructions li {
+  margin-bottom: 5px;
+}
+
+/* ============================================================
+   第 12 部分：游戏结束状态
+   ============================================================ */
+
+/* 游戏结束后禁用输入框 */
+.input-section.disabled {
+  opacity: 0.5;  /* 半透明 */
+  pointer-events: none;  /* 禁止鼠标交互 */
+}

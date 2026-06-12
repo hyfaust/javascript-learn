@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>猜数字游戏 (Guess Number Game)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-container">
+    <!-- 游戏标题 -->
+    <h1 class="game-title">猜数字游戏</h1>
+    <p class="subtitle">我想了一个 1-100 之间的数字，你能猜到它吗？</p>
+    
+    <!-- 游戏主区域 -->
+    <div class="game-area">
+      <!-- 输入区域 -->
+      <div class="input-section">
+        <label for="guess-input">输入你的猜测：</label>
+        <input type="number" id="guess-input" min="1" max="100" placeholder="1-100">
+        <button id="guess-btn" class="btn primary-btn">猜！</button>
+      </div>
+      
+      <!-- 消息显示区域 -->
+      <div id="message" class="message"></div>
+      
+      <!-- 尝试次数 -->
+      <div class="attempts-section">
+        <span>已尝试次数：</span>
+        <span id="attempts-count" class="attempts-count">0</span>
+      </div>
+      
+      <!-- 历史记录 -->
+      <div class="history-section">
+        <h3>猜测历史</h3>
+        <div id="guess-history" class="guess-history">
+          <p class="no-history">还没有猜测记录</p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 重新开始按钮 -->
+    <button id="restart-btn" class="btn restart-btn">重新开始</button>
+    
+    <!-- 游戏说明 -->
+    <div class="instructions">
+      <h3>游戏说明</h3>
+      <ul>
+        <li>系统会随机生成一个 1-100 之间的数字</li>
+        <li>输入你的猜测，系统会告诉你太大还是太小</li>
+        <li>尽可能少的次数猜中目标数字</li>
+        <li>按回车键也可以提交猜测</li>
+      </ul>
+    </div>
+  </div>
+  
+  <!-- 引用外部 JavaScript 文件 -->
+  <script src="script.js"></script>
+</body>
+</html>

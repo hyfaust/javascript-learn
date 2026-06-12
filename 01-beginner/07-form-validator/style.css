@@ -1,0 +1,150 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    padding: 40px;
+    width: 100%;
+    max-width: 450px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+/* 表单组 */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* 验证状态 */
+.form-group input.valid {
+    border-color: #28a745;
+}
+
+.form-group input.invalid {
+    border-color: #dc3545;
+}
+
+.error-msg {
+    display: block;
+    min-height: 20px;
+    margin-top: 4px;
+    font-size: 12px;
+    color: #dc3545;
+}
+
+/* 密码强度 */
+.strength-bar {
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.strength-fill {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s;
+    border-radius: 3px;
+}
+
+.strength-fill.weak { width: 33%; background: #dc3545; }
+.strength-fill.medium { width: 66%; background: #ffc107; }
+.strength-fill.strong { width: 100%; background: #28a745; }
+
+.strength-text {
+    display: block;
+    margin-top: 4px;
+    font-size: 12px;
+    text-align: right;
+}
+
+/* 提交按钮 */
+#submitBtn {
+    width: 100%;
+    padding: 14px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#submitBtn:hover:not(:disabled) {
+    background: #5a6fd6;
+    transform: translateY(-2px);
+}
+
+#submitBtn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* 状态提示 */
+.form-status {
+    margin-top: 20px;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    display: none;
+}
+
+.form-status.success {
+    display: block;
+    background: #d4edda;
+    color: #155724;
+}
+
+.form-status.error {
+    display: block;
+    background: #f8d7da;
+    color: #721c24;
+}

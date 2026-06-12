@@ -1,0 +1,12 @@
+{
+  "name": "websocket-chat",
+  "version": "1.0.0",
+  "description": "A real-time chat room built with WebSocket (ws library)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

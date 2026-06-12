@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WebSocket Chat Room</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="chat-container">
+    <header>
+      <h1>💬 Real-time Chat Room</h1>
+      <div class="status">
+        <span class="dot"></span>
+        <span id="status-text">Connecting...</span>
+      </div>
+    </header>
+
+    <div class="username-bar">
+      <label for="username">Username:</label>
+      <input type="text" id="username" value="User" placeholder="Enter your name">
+    </div>
+
+    <div id="messages" class="messages"></div>
+
+    <form id="chat-form" class="chat-form">
+      <input type="text" id="message-input" placeholder="Type a message..." autocomplete="off">
+      <button type="submit">Send</button>
+    </form>
+  </div>
+
+  <script>
+    // === 1. DOM Elements ===
+    const messagesDiv = document.getElementById('messages');
+    const chatForm = document.getElementById('chat-form');
+    const messageInput = document.getElementById('message-input');
+    const usernameInput = document.getElementById('username');
+    const statusText = document.getElementById('status-text');
+
+    // === 2. WebSocket Connection ===
+    const ws = new WebSocket(`ws://${window.location.host}`);
+
+    ws.onopen = () => {
+      statusText.textContent = 'Connected';
+      document.querySelector('.dot').classList.add('connected');
+    };
+
+    ws.onclose = () => {
+      statusText.textContent = 'Disconnected';
+      document.querySelector('.dot').classList.remove('connected');
+    };
+
+    ws.onerror = (err) => {
+      statusText.textContent = 'Error';
+      console.error('WebSocket error:', err);
+    };
+
+    // === 3. Handle Incoming Messages ===
+    ws.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+
+      const messageEl = document.createElement('div');
+      messageEl.classList.add('message', data.type);
+
+      if (data.type === 'chat') {
+        messageEl.innerHTML = `
+          <span class="username">${escapeHtml(data.username)}</span>
+          <span class="time">${data.timestamp}</span>
+          <div class="content">${escapeHtml(data.content)}</div>
+        `;
+      } else if (data.type === 'system') {
+        messageEl.innerHTML = `<span class="content">${escapeHtml(data.content)}</span>`;
+      }
+
+      messagesDiv.appendChild(messageEl);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    };
+
+    // === 4. Send Message ===
+    chatForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const content = messageInput.value.trim();
+      if (!content) return;
+
+      ws.send(JSON.stringify({
+        type: 'chat',
+        username: usernameInput.value.trim() || 'Anonymous',
+        content: content,
+      }));
+
+      messageInput.value = '';
+      messageInput.focus();
+    });
+
+    // === 5. Utility: Escape HTML to Prevent XSS ===
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

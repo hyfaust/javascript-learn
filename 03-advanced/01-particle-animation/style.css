@@ -1,0 +1,204 @@
+/* ==========================================
+   全局样式设置 - 暗色主题
+   ========================================== */
+
+/* 重置默认样式并设置暗色背景 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    overflow: hidden; /* 防止出现滚动条 */
+    background: #0a0a0a; /* 深色背景 */
+    font-family: 'Microsoft YaHei', 'SimHei', sans-serif; /* 中文字体支持 */
+    color: #ffffff;
+}
+
+/* ==========================================
+   全屏画布样式
+   ========================================== */
+
+/* 画布覆盖整个视口 */
+#particleCanvas {
+    position: fixed; /* 固定定位，不随页面滚动 */
+    top: 0;
+    left: 0;
+    width: 100vw; /* 视口宽度100% */
+    height: 100vh; /* 视口高度100% */
+    display: block; /* 移除inline元素默认的底部间隙 */
+    cursor: crosshair; /* 鼠标悬停时显示十字准心 */
+}
+
+/* ==========================================
+   控制面板样式 - 浮动面板
+   ========================================== */
+
+#controlPanel {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 280px;
+    background: rgba(20, 20, 30, 0.85); /* 半透明深色背景 */
+    border: 1px solid rgba(100, 150, 255, 0.3); /* 半透明边框 */
+    border-radius: 12px; /* 圆角 */
+    backdrop-filter: blur(10px); /* 毛玻璃效果 */
+    -webkit-backdrop-filter: blur(10px); /* Safari 兼容性 */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5); /* 柔和阴影 */
+    z-index: 1000; /* 确保面板在画布上方 */
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* 面板头部 */
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid rgba(100, 150, 255, 0.2);
+}
+
+.panel-header h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: #88ccff; /* 淡蓝色标题 */
+    margin: 0;
+}
+
+#togglePanel {
+    background: transparent;
+    border: 1px solid rgba(100, 150, 255, 0.4);
+    color: #88ccff;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: all 0.2s ease;
+}
+
+#togglePanel:hover {
+    background: rgba(100, 150, 255, 0.2);
+}
+
+/* 面板内容区域 */
+.panel-content {
+    padding: 16px;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+/* 折叠状态 */
+#controlPanel.collapsed .panel-content {
+    max-height: 0;
+    padding: 0 16px;
+    opacity: 0;
+    overflow: hidden;
+}
+
+/* ==========================================
+   控制组样式
+   ========================================== */
+
+.control-group {
+    margin-bottom: 16px;
+}
+
+.control-group label {
+    display: block;
+    font-size: 13px;
+    color: #bbbbbb;
+    margin-bottom: 6px;
+}
+
+.control-group label span {
+    color: #88ccff;
+    font-weight: 600;
+}
+
+/* 范围滑块样式 */
+input[type="range"] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none; /* 移除默认样式 */
+    appearance: none;
+    background: linear-gradient(to right, #2a2a3a, #4a4a6a); /* 渐变背景 */
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* 滑块拇指样式 */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: linear-gradient(135deg, #66aaff, #4488dd);
+    border-radius: 50%; /* 圆形 */
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(100, 150, 255, 0.5); /* 发光效果 */
+    transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2); /* 悬停时放大 */
+}
+
+/* 颜色选择器 */
+input[type="color"] {
+    width: 100%;
+    height: 36px;
+    border: 1px solid rgba(100, 150, 255, 0.3);
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+    padding: 2px;
+}
+
+/* 按钮样式 */
+.buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.buttons button {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid rgba(100, 150, 255, 0.4);
+    border-radius: 6px;
+    background: rgba(40, 40, 60, 0.8);
+    color: #cccccc;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.buttons button:hover {
+    background: rgba(100, 150, 255, 0.3);
+    color: #ffffff;
+    border-color: rgba(100, 150, 255, 0.6);
+}
+
+.buttons button:active {
+    transform: scale(0.95); /* 点击时轻微缩放 */
+}
+
+/* ==========================================
+   统计信息样式
+   ========================================== */
+
+.stats {
+    padding-top: 12px;
+    border-top: 1px solid rgba(100, 150, 255, 0.2);
+    font-size: 12px;
+    color: #888888;
+}
+
+.stats p {
+    margin-bottom: 4px;
+}
+
+.stats span {
+    color: #88ccff;
+    font-weight: 600;
+    font-family: 'Consolas', 'Courier New', monospace; /* 等宽字体显示数字 */
+}

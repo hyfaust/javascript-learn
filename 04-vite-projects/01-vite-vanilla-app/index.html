@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite Vanilla App</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <div id="app">
+      <h1>⚡ Vite + Vanilla JS</h1>
+      <p class="subtitle">Experience the speed of Vite with pure JavaScript</p>
+
+      <div class="card">
+        <h2>Counter</h2>
+        <div class="counter">
+          <button id="decrement">−</button>
+          <span id="count">0</span>
+          <button id="increment">+</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Color Picker</h2>
+        <div class="color-picker">
+          <input type="color" id="color-input" value="#4a90d9" />
+          <div id="color-display" class="color-display"></div>
+          <span id="color-value">#4a90d9</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Todo List</h2>
+        <form id="todo-form">
+          <input type="text" id="todo-input" placeholder="Add a task..." />
+          <button type="submit">Add</button>
+        </form>
+        <ul id="todo-list"></ul>
+      </div>
+
+      <div class="info">
+        <p>Edit <code>main.js</code> and save — the page updates instantly!</p>
+        <p class="hmr">🔥 Hot Module Replacement is active</p>
+      </div>
+    </div>
+
+    <!-- Vite uses the src attribute to find the entry point -->
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>

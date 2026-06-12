@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>粒子动画系统 - Particle Animation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 全屏画布用于渲染粒子动画 -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- 浮动控制面板：用于调节粒子参数 -->
+    <div id="controlPanel">
+        <div class="panel-header">
+            <h3>粒子控制面板</h3>
+            <button id="togglePanel" title="折叠/展开面板">&gt;&lt;</button>
+        </div>
+
+        <div class="panel-content" id="panelContent">
+            <!-- 粒子数量控制 -->
+            <div class="control-group">
+                <label for="particleCount">粒子数量: <span id="countValue">50</span></label>
+                <input type="range" id="particleCount" min="10" max="200" value="50" step="10">
+            </div>
+
+            <!-- 粒子大小控制 -->
+            <div class="control-group">
+                <label for="particleSize">粒子大小: <span id="sizeValue">5</span></label>
+                <input type="range" id="particleSize" min="1" max="20" value="5">
+            </div>
+
+            <!-- 粒子颜色选择 -->
+            <div class="control-group">
+                <label for="particleColor">粒子颜色:</label>
+                <input type="color" id="particleColor" value="#00aaff">
+            </div>
+
+            <!-- 粒子速度控制 -->
+            <div class="control-group">
+                <label for="particleSpeed">粒子速度: <span id="speedValue">3</span></label>
+                <input type="range" id="particleSpeed" min="1" max="10" value="3">
+            </div>
+
+            <!-- 粒子生命周期控制 -->
+            <div class="control-group">
+                <label for="particleLife">生命周期: <span id="lifeValue">100</span></label>
+                <input type="range" id="particleLife" min="20" max="300" value="100" step="10">
+            </div>
+
+            <!-- 重力效果 -->
+            <div class="control-group">
+                <label for="gravity">重力: <span id="gravityValue">0</span></label>
+                <input type="range" id="gravity" min="-5" max="5" value="0" step="0.5">
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="control-group buttons">
+                <button id="clearBtn">清空画布</button>
+                <button id="pauseBtn">暂停</button>
+                <button id="resetBtn">重置参数</button>
+            </div>
+
+            <!-- 统计信息 -->
+            <div class="stats">
+                <p>活跃粒子数: <span id="activeCount">0</span></p>
+                <p>FPS: <span id="fpsDisplay">0</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入主要的脚本文件 -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+/* ============================================
+   可选链与空值合并 - 样式表
+   采用安全防护风格设计
+   ============================================ */
+
+/* --- 基础重置 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* --- 头部样式 --- */
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 1.8em;
+    color: #0f3460;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-size: 1.1em;
+    color: #666;
+}
+
+/* --- 主内容区域 --- */
+main {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.demo-section {
+    margin-bottom: 40px;
+}
+
+.demo-section h2 {
+    color: #fff;
+    font-size: 1.6em;
+    margin-bottom: 20px;
+    padding-left: 15px;
+    border-left: 4px solid #e94560;
+}
+
+/* --- 演示卡片 --- */
+.demo-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+}
+
+.demo-card:hover {
+    transform: translateY(-2px);
+}
+
+.demo-card h3 {
+    color: #0f3460;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+
+.description {
+    color: #777;
+    margin-bottom: 15px;
+    font-style: italic;
+}
+
+/* --- 代码块样式 --- */
+.code-block {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 20px;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin-bottom: 15px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.code-block pre {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+/* --- 按钮样式 --- */
+.run-btn {
+    background: linear-gradient(90deg, #0f3460, #e94560);
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-size: 1em;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.run-btn:hover {
+    background: linear-gradient(90deg, #e94560, #0f3460);
+    transform: scale(1.05);
+}
+
+.run-btn:active {
+    transform: scale(0.98);
+}
+
+/* --- 结果展示区 --- */
+.result {
+    margin-top: 15px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-left: 4px solid #0f3460;
+    border-radius: 4px;
+    min-height: 50px;
+    font-family: "Consolas", "Courier New", monospace;
+    white-space: pre-wrap;
+}
+
+.result.has-content {
+    animation: fadeIn 0.3s ease-in;
+}
+
+.result.success {
+    border-left-color: #4caf50;
+    background: #e8f5e9;
+}
+
+.result.error {
+    border-left-color: #f44336;
+    background: #ffebee;
+}
+
+.result.warning {
+    border-left-color: #ff9800;
+    background: #fff3e0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- 输入框样式 --- */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #0f3460;
+}
+
+.input-group input[type="checkbox"] {
+    width: auto;
+    margin-right: 8px;
+}
+
+/* --- 对比表格样式 --- */
+.comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 15px 0;
+}
+
+.comparison-table th,
+.comparison-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.comparison-table th {
+    background: #0f3460;
+    color: #fff;
+}
+
+.comparison-table tr:nth-child(even) {
+    background: #f5f5f5;
+}
+
+/* --- 互动练习区特殊样式 --- */
+.demo-card.interactive {
+    border: 2px dashed #0f3460;
+}
+
+/* --- 页脚 --- */
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #fff;
+    margin-top: 30px;
+}
+
+/* --- 响应式设计 --- */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.4em;
+    }
+
+    .demo-section h2 {
+        font-size: 1.3em;
+    }
+
+    .code-block {
+        font-size: 0.85em;
+        padding: 15px;
+    }
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>箭头函数 vs 普通函数</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>➡️ 箭头函数 vs 普通函数</h1>
+
+        <!-- 语法对比 -->
+        <section class="demo-section">
+            <h2>语法对比</h2>
+            <div class="comparison">
+                <div class="code-block">
+                    <h3>普通函数</h3>
+                    <pre><code>function add(a, b) {
+    return a + b;
+}
+
+const greet = function(name) {
+    return 'Hello, ' + name;
+};</code></pre>
+                </div>
+                <div class="code-block">
+                    <h3>箭头函数</h3>
+                    <pre><code>const add = (a, b) => {
+    return a + b;
+};
+
+const greet = (name) => `Hello, ${name}`;
+
+// 简写形式（单表达式）
+const multiply = (a, b) => a * b;
+const square = x => x * x;  // 单参数可省略括号</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- this 绑定演示 -->
+        <section class="demo-section">
+            <h2>this 绑定差异（重要！）</h2>
+            <div class="demo-box">
+                <h3>演示 1: 对象方法</h3>
+                <div id="objectDemo" class="demo-result"></div>
+                <button onclick="runObjectDemo()">运行演示</button>
+            </div>
+            <div class="demo-box">
+                <h3>演示 2: setTimeout 中的 this</h3>
+                <div id="timeoutDemo" class="demo-result"></div>
+                <button onclick="runTimeoutDemo()">运行演示</button>
+            </div>
+            <div class="demo-box">
+                <h3>演示 3: 事件监听器中的 this</h3>
+                <div id="eventDemo" class="demo-result"></div>
+                <button id="eventBtn">点击我测试</button>
+            </div>
+        </section>
+
+        <!-- 使用指南 -->
+        <section class="demo-section">
+            <h2>何时使用？</h2>
+            <div class="guidelines">
+                <div class="guideline good">
+                    <h3>✅ 适合用箭头函数</h3>
+                    <ul>
+                        <li>回调函数（map, filter, setTimeout）</li>
+                        <li>不需要 this 的工具函数</li>
+                        <li>需要保持外层 this 的场景</li>
+                    </ul>
+                </div>
+                <div class="guide">
+                    <h3>❌ 不能用箭头函数</h3>
+                    <ul>
+                        <li>对象方法（需要 this 指向对象）</li>
+                        <li>构造函数（需要 new 调用）</li>
+                        <li>DOM 事件处理器（需要 this 指向元素）</li>
+                        <li>需要 arguments 对象的函数</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

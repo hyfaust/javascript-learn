@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES 模块 (ES Modules) 交互式学习</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>ES 模块 (ES Modules)</h1>
+        <p class="subtitle">学习现代 JavaScript 模块化编程</p>
+    </header>
+
+    <main>
+        <!-- 模块导入导出部分 -->
+        <section class="demo-section">
+            <h2>一、模块导入与导出</h2>
+
+            <!-- 命名导出 -->
+            <div class="demo-card">
+                <h3>1. 命名导出 (Named Exports)</h3>
+                <p class="description">使用 export 导出多个函数/变量</p>
+                <div class="code-block">
+                    <pre>// math.js - 导出
+export function add(a, b) { return a + b; }
+export function multiply(a, b) { return a * b; }
+
+// main.js - 导入
+import { add, multiply } from './math.js';</pre>
+                </div>
+                <button class="run-btn" onclick="runNamedExports()">运行演示</button>
+                <div class="result" id="named-exports-result"></div>
+            </div>
+
+            <!-- 默认导出 -->
+            <div class="demo-card">
+                <h3>2. 默认导出 (Default Export)</h3>
+                <p class="description">每个模块只能有一个默认导出</p>
+                <div class="code-block">
+                    <pre>// config.js - 导出
+export default { theme: "dark", lang: "zh" };
+
+// main.js - 导入（可以自定义名称）
+import config from './config.js';</pre>
+                </div>
+                <button class="run-btn" onclick="runDefaultExport()">运行演示</button>
+                <div class="result" id="default-export-result"></div>
+            </div>
+
+            <!-- 重命名导入 -->
+            <div class="demo-card">
+                <h3>3. 重命名导入</h3>
+                <p class="description">使用 as 关键字为导入的模块指定别名</p>
+                <div class="code-block">
+                    <pre>import { add as sum, multiply as product } from './math.js';
+// 现在可以使用 sum() 和 product() 而不是 add() 和 multiply()</pre>
+                </div>
+                <button class="run-btn" onclick="runRenameImport()">运行演示</button>
+                <div class="result" id="rename-import-result"></div>
+            </div>
+        </section>
+
+        <!-- 工具函数模块部分 -->
+        <section class="demo-section">
+            <h2>二、工具函数模块</h2>
+
+            <!-- 日期格式化 -->
+            <div class="demo-card">
+                <h3>1. 日期格式化 (formatDate)</h3>
+                <p class="description">从 utils.js 模块导入日期格式化函数</p>
+                <div class="code-block">
+                    <pre>import { formatDate } from './utils.js';
+formatDate(new Date(), "YYYY-MM-DD");  // "2024-01-15"
+formatDate(new Date(), "YYYY年MM月DD日");  // "2024年01月15日"</pre>
+                </div>
+                <button class="run-btn" onclick="runDateFormat()">运行演示</button>
+                <div class="result" id="date-format-result"></div>
+            </div>
+
+            <!-- 生成唯一ID -->
+            <div class="demo-card">
+                <h3>2. 生成唯一 ID (generateId)</h3>
+                <p class="description">生成简短的唯一标识符</p>
+                <div class="code-block">
+                    <pre>import { generateId } from './utils.js';
+generateId();  // "a3f9k2" (随机)</pre>
+                </div>
+                <button class="run-btn" onclick="runGenerateId()">运行演示</button>
+                <div class="result" id="generate-id-result"></div>
+            </div>
+
+            <!-- 防抖函数 -->
+            <div class="demo-card">
+                <h3>3. 防抖函数 (debounce)</h3>
+                <p class="description">延迟执行，避免频繁触发</p>
+                <div class="code-block">
+                    <pre>import { debounce } from './utils.js';
+const debouncedFn = debounce(() => console.log("执行!"), 500);
+// 频繁调用时，只在最后一次调用后 500ms 执行
+debouncedFn();  // 不会立即执行
+debouncedFn();  // 重置计时器
+debouncedFn();  // 再次重置</pre>
+                </div>
+                <button class="run-btn" onclick="runDebounce()">运行演示</button>
+                <div class="result" id="debounce-result"></div>
+            </div>
+        </section>
+
+        <!-- 数学模块部分 -->
+        <section class="demo-section">
+            <h2>三、数学模块演示</h2>
+
+            <div class="demo-card">
+                <h3>math.js 模块功能</h3>
+                <p class="description">演示 add, multiply, factorial, fibonacci 函数</p>
+                <div class="input-group">
+                    <label for="math-a">数字 A：</label>
+                    <input type="number" id="math-a" value="5" min="0" max="20">
+                </div>
+                <div class="input-group">
+                    <label for="math-b">数字 B：</label>
+                    <input type="number" id="math-b" value="3" min="0" max="20">
+                </div>
+                <button class="run-btn" onclick="runMathDemo()">计算</button>
+                <div class="result" id="math-result"></div>
+            </div>
+        </section>
+
+        <!-- 配置模块部分 -->
+        <section class="demo-section">
+            <h2>四、配置模块</h2>
+
+            <div class="demo-card">
+                <h3>config.js 设置</h3>
+                <p class="description">展示如何导入和使用配置对象</p>
+                <div class="code-block">
+                    <pre>import config from './config.js';
+console.log(config.theme);    // "dark"
+console.log(config.lang);     // "zh"
+console.log(config.version);  // "1.0.0"</pre>
+                </div>
+                <button class="run-btn" onclick="runConfigDemo()">运行演示</button>
+                <div class="result" id="config-result"></div>
+            </div>
+        </section>
+
+        <!-- 模块注意事项 -->
+        <section class="demo-section">
+            <h2>五、模块注意事项</h2>
+            <div class="demo-card">
+                <h3>重要提示</h3>
+                <div class="result" id="module-notes">
+<strong>📌 ES 模块关键点：</strong>
+
+1. 必须在 &lt;script type="module"&gt; 中使用
+2. 模块自动使用严格模式 ("use strict")
+3. 每个模块有独立的作用域
+4. 导入的路径必须包含扩展名 (.js)
+5. 导入是只读的（live bindings）
+6. 模块代码在页面加载时自动执行
+
+<strong>⚠️ 运行要求：</strong>
+必须通过 HTTP 服务器运行（不能直接打开 file://）
+因为浏览器的 CORS 安全策略限制。
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>ES 模块交互式学习 | 模块化编程让代码更清晰</p>
+    </footer>
+
+    <!-- 注意：使用 type="module" 告诉浏览器这是 ES 模块 -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>

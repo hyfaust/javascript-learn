@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单验证器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📋 表单验证器</h1>
+        <p class="subtitle">学习实时表单验证与正则表达式</p>
+
+        <form id="registerForm" novalidate>
+            <!-- 用户名 -->
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" id="username" placeholder="3-16位字母数字或下划线">
+                <span class="error-msg" id="usernameError"></span>
+            </div>
+
+            <!-- 邮箱 -->
+            <div class="form-group">
+                <label for="email">邮箱</label>
+                <input type="email" id="email" placeholder="example@email.com">
+                <span class="error-msg" id="emailError"></span>
+            </div>
+
+            <!-- 密码 -->
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" id="password" placeholder="至少8位，包含字母和数字">
+                <span class="error-msg" id="passwordError"></span>
+                <div class="strength-bar">
+                    <div id="strengthFill" class="strength-fill"></div>
+                </div>
+                <span id="strengthText" class="strength-text"></span>
+            </div>
+
+            <!-- 确认密码 -->
+            <div class="form-group">
+                <label for="confirmPassword">确认密码</label>
+                <input type="password" id="confirmPassword" placeholder="再次输入密码">
+                <span class="error-msg" id="confirmError"></span>
+            </div>
+
+            <!-- 手机号 -->
+            <div class="form-group">
+                <label for="phone">手机号</label>
+                <input type="tel" id="phone" placeholder="11位手机号">
+                <span class="error-msg" id="phoneError"></span>
+            </div>
+
+            <!-- 提交按钮 -->
+            <button type="submit" id="submitBtn" disabled>注册</button>
+        </form>
+
+        <!-- 验证状态 -->
+        <div id="formStatus" class="form-status"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>简易计算器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 简易计算器</h1>
+        
+        <div class="calculator">
+            <!-- 显示屏 -->
+            <div class="display">
+                <input type="text" id="display" readonly value="">
+            </div>
+
+            <!-- 按钮区域 -->
+            <div class="buttons">
+                <button class="btn clear" data-value="C">C</button>
+                <button class="btn operator" data-value="/">/</button>
+                <button class="btn operator" data-value="*">×</button>
+                <button class="btn delete" data-value="DEL">DEL</button>
+
+                <button class="btn" data-value="7">7</button>
+                <button class="btn" data-value="8">8</button>
+                <button class="btn" data-value="9">9</button>
+                <button class="btn operator" data-value="-">-</button>
+
+                <button class="btn" data-value="4">4</button>
+                <button class="btn" data-value="5">5</button>
+                <button class="btn" data-value="6">6</button>
+                <button class="btn operator" data-value="+">+</button>
+
+                <button class="btn" data-value="1">1</button>
+                <button class="btn" data-value="2">2</button>
+                <button class="btn" data-value="3">3</button>
+                <button class="btn equals" data-value="=">=</button>
+
+                <button class="btn zero" data-value="0">0</button>
+                <button class="btn" data-value=".">.</button>
+            </div>
+        </div>
+
+        <!-- 计算历史 -->
+        <div class="history">
+            <h3>计算历史</h3>
+            <ul id="historyList"></ul>
+            <button id="clearHistory">清空历史</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

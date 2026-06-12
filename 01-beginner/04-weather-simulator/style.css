@@ -1,0 +1,385 @@
+/**
+ * 天气信息模拟器 - 样式表
+ * 
+ * 设计理念：清新自然，根据天气类型动态改变背景渐变
+ * 包含卡片式布局，信息层次清晰
+ */
+
+/* ============================================================
+   第 1 部分：全局样式
+   ============================================================ */
+
+/* 重置默认样式，统一盒模型 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 
+ * body 样式
+ * 默认背景渐变（会被 JavaScript 动态修改）
+ */
+body {
+  font-family: 'Segoe UI', 'Microsoft YaHei', Arial, sans-serif;
+  background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+  min-height: 100vh;
+  padding: 20px;
+  transition: background 0.5s ease;  /* 背景变化时平滑过渡 */
+}
+
+/* ============================================================
+   第 2 部分：应用容器
+   ============================================================ */
+
+/* 应用主容器 */
+.app-container {
+  max-width: 700px;
+  margin: 0 auto;  /* 水平居中 */
+}
+
+/* ============================================================
+   第 3 部分：头部标题
+   ============================================================ */
+
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);  /* 文字阴影 */
+}
+
+.app-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.app-subtitle {
+  font-size: 1.1rem;
+  opacity: 0.9;  /* 透明度 */
+}
+
+/* ============================================================
+   第 4 部分：城市选择器
+   ============================================================ */
+
+/* 城市选择区域 */
+.city-selector {
+  background: white;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 选择器标签 */
+.city-selector label {
+  font-weight: bold;
+  color: #4a5568;
+  font-size: 1.1rem;
+}
+
+/* 
+ * 下拉选择框样式
+ * appearance: none 移除浏览器默认样式
+ */
+.city-dropdown {
+  padding: 12px 40px 12px 15px;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  background-color: white;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 150px;
+}
+
+/* 下拉框获得焦点时的样式 */
+.city-dropdown:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+/* ============================================================
+   第 5 部分：天气卡片
+   ============================================================ */
+
+/* 天气信息卡片 */
+.weather-card {
+  background: rgba(255, 255, 255, 0.95);  /* 半透明白色 */
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 20px;
+  transition: all 0.5s ease;  /* 平滑过渡 */
+}
+
+/* ============================================================
+   第 6 部分：天气图标
+   ============================================================ */
+
+/* 
+ * 天气图标容器
+ * 使用 emoji 作为天气图标，通过 CSS 控制大小
+ */
+.weather-icon {
+  font-size: 5rem;
+  margin-bottom: 15px;
+  animation: float 3s ease-in-out infinite;  /* 浮动动画 */
+}
+
+/* 浮动动画 */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+/* ============================================================
+   第 7 部分：城市和温度
+   ============================================================ */
+
+/* 城市名称 */
+.city-name {
+  color: #2d3748;
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+/* 温度区域 */
+.temperature-section {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+
+/* 温度数字 */
+.temperature {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #2d3748;
+  line-height: 1;  /* 行高 */
+}
+
+/* 温度单位 */
+.temperature-unit {
+  font-size: 1.5rem;
+  color: #718096;
+  margin-top: 10px;
+}
+
+/* 天气描述 */
+.weather-desc {
+  color: #718096;
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+}
+
+/* ============================================================
+   第 8 部分：详细信息网格
+   ============================================================ */
+
+/* 详细信息网格布局 */
+.details-grid {
+  display: grid;
+  /* 
+   * grid-template-columns: repeat(3, 1fr) 创建 3 列等宽网格
+   * repeat() 是 CSS 函数，重复指定次数
+   * 1fr 表示 1 份（fractional unit）
+   */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 25px;
+}
+
+/* 单个详情项 */
+.detail-item {
+  background: #f7fafc;
+  border-radius: 10px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;  /* 垂直排列 */
+  gap: 5px;
+}
+
+/* 详情标签 */
+.detail-label {
+  color: #a0aec0;
+  font-size: 0.85rem;
+  text-transform: uppercase;  /* 大写 */
+  letter-spacing: 1px;  /* 字母间距 */
+}
+
+/* 详情数值 */
+.detail-value {
+  color: #2d3748;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* ============================================================
+   第 9 部分：建议信息
+   ============================================================ */
+
+/* 建议框 */
+.suggestion {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* ============================================================
+   第 10 部分：天气预报
+   ============================================================ */
+
+/* 预报区域标题 */
+.forecast-section h3 {
+  color: white;
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* 预报容器 */
+.forecast-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* 单个预报卡片 */
+.forecast-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* 预报卡片悬停效果 */
+.forecast-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 预报日期 */
+.forecast-date {
+  color: #718096;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+/* 预报图标 */
+.forecast-icon {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+/* 预报温度 */
+.forecast-temp {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2d3748;
+}
+
+/* 预报描述 */
+.forecast-desc {
+  color: #718096;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* ============================================================
+   第 11 部分：天气主题背景
+   ============================================================ */
+
+/* 
+ * 不同天气类型的背景渐变
+ * JavaScript 会根据天气类型给 body 添加对应的类名
+ */
+
+/* 晴天 - 温暖的橙黄色渐变 */
+body.sunny {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+/* 多云 - 柔和的蓝灰色渐变 */
+body.cloudy {
+  background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+
+/* 阴天 - 深灰色渐变 */
+body.overcast {
+  background: linear-gradient(135deg, #89959b 0%, #bdc3c7 100%);
+}
+
+/* 雨天 - 蓝紫色渐变 */
+body.rainy {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* 雪天 - 冷色调蓝白渐变 */
+body.snowy {
+  background: linear-gradient(135deg, #e6e9f0 0%, #eef1f5 100%);
+}
+
+/* 雷暴 - 深色渐变 */
+body.stormy {
+  background: linear-gradient(135deg, #434343 0%, #000000 100%);
+}
+
+/* 雾天 - 灰白色渐变 */
+body.foggy {
+  background: linear-gradient(135deg, #d7d2cc 0%, #304352 100%);
+}
+
+/* ============================================================
+   第 12 部分：响应式设计
+   ============================================================ */
+
+/* 
+ * @media 查询
+ * 当屏幕宽度小于 600px 时应用这些样式
+ * 用于适配手机等小屏幕设备
+ */
+@media (max-width: 600px) {
+  .app-title {
+    font-size: 1.8rem;
+  }
+  
+  .weather-card {
+    padding: 25px;
+  }
+  
+  .temperature {
+    font-size: 3rem;
+  }
+  
+  /* 详细信息变为 2 列 */
+  .details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* 预报变为单列 */
+  .forecast-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .city-selector {
+    flex-direction: column;
+    gap: 10px;
+  }
+}

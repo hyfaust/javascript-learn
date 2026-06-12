@@ -1,0 +1,406 @@
+/**
+ * ============================================================================
+ * 排序算法可视化 - 样式表 (style.css)
+ * ============================================================================
+ *
+ * 设计理念：
+ * - 使用 CSS 变量实现主题化，方便后续扩展深色模式等
+ * - Flexbox + Grid 实现响应式布局
+ * - 平滑过渡动画增强视觉效果
+ * - 颜色编码清晰区分排序状态
+ * ============================================================================
+ */
+
+/* ========================================================================
+ * CSS 变量（自定义属性）
+ * 定义在 :root 伪类中，全局可用
+ * ======================================================================== */
+:root {
+    /* 主色调 */
+    --primary-color: #4361ee;
+    --primary-hover: #3a56d4;
+    --success-color: #2ec4b6;
+    --success-hover: #28b0a3;
+    --warning-color: #ff9f1c;
+    --warning-hover: #e68f19;
+
+    /* 柱子颜色 */
+    --bar-unsorted: #4361ee;    /* 蓝色：未排序 */
+    --bar-comparing: #ffd60a;   /* 黄色：比较中 */
+    --bar-swapping: #e63946;    /* 红色：交换中 */
+    --bar-sorted: #06d6a0;      /* 绿色：已排序 */
+    --bar-pivot: #9d4edd;       /* 紫色：快速排序基准值 */
+
+    /* 背景与文字 */
+    --bg-color: #f8f9fa;
+    --bg-container: #ffffff;
+    --text-primary: #212529;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+
+    /* 尺寸 */
+    --container-max-width: 1200px;
+    --bar-gap: 1px;
+    --border-radius: 8px;
+}
+
+/* ========================================================================
+ * 全局重置与基础样式
+ * ======================================================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* 重要：让 padding 和 border 包含在宽高内 */
+}
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* ========================================================================
+ * 页面头部
+ * ======================================================================== */
+header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+header h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+header .subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+}
+
+/* ========================================================================
+ * 控制面板
+ * 使用 flexbox 实现响应式排列
+ * ======================================================================== */
+.controls {
+    display: flex;
+    flex-wrap: wrap;          /* 空间不足时自动换行 */
+    justify-content: center;   /* 居中对齐 */
+    align-items: flex-end;     /* 底部对齐（让滑块和按钮对齐） */
+    gap: 20px;                 /* 元素间距 */
+    background-color: var(--bg-container);
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.control-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.control-group.buttons {
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* 下拉选择框 */
+select {
+    padding: 8px 12px;
+    font-size: 0.95rem;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+
+select:hover,
+select:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* 滑块 (range input) 样式 */
+input[type="range"] {
+    -webkit-appearance: none; /* 移除默认样式 (Chrome/Safari) */
+    appearance: none;
+    width: 180px;
+    height: 6px;
+    background: linear-gradient(to right, var(--primary-color), var(--success-color));
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+/* 滑块拖动按钮 (Chrome/Safari) */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    background: var(--bg-container);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+    transform: scale(1.2);
+}
+
+/* 滑块拖动按钮 (Firefox) */
+input[type="range"]::-moz-range-thumb {
+    width: 18px;
+    height: 18px;
+    background: var(--bg-container);
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ========================================================================
+ * 按钮样式
+ * ======================================================================== */
+.btn {
+    padding: 10px 20px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    transform: none;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* 主按钮（生成数组） */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+}
+
+/* 成功按钮（开始排序） */
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover:not(:disabled) {
+    background-color: var(--success-hover);
+}
+
+/* 警告按钮（重置） */
+.btn-warning {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.btn-warning:hover:not(:disabled) {
+    background-color: var(--warning-hover);
+}
+
+/* ========================================================================
+ * 状态栏
+ * ======================================================================== */
+.status-bar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 12px 20px;
+    background-color: var(--bg-container);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin-bottom: 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.status-bar span {
+    color: var(--text-secondary);
+}
+
+.status-bar span strong {
+    color: var(--text-primary);
+}
+
+/* ========================================================================
+ * 可视化容器（柱状图区域）
+ * ======================================================================== */
+#visualizer-container {
+    display: flex;
+    align-items: flex-end;     /* 柱子底部对齐 */
+    justify-content: center;   /* 居中排列 */
+    gap: var(--bar-gap);       /* 柱子间距 */
+    height: 400px;             /* 容器高度 */
+    background-color: var(--bg-container);
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 16px;
+    overflow: hidden;          /* 防止柱子溢出 */
+}
+
+/* 单个柱子 */
+.bar {
+    flex: 1;                   /* 平均分配宽度 */
+    background-color: var(--bar-unsorted);
+    border-radius: 3px 3px 0 0; /* 顶部圆角 */
+    transition: height 0.1s ease, background-color 0.15s ease;
+    min-width: 3px;            /* 最小宽度防止过小 */
+}
+
+/* 柱子状态颜色 */
+.bar.comparing {
+    background-color: var(--bar-comparing) !important;
+}
+
+.bar.swapping {
+    background-color: var(--bar-swapping) !important;
+}
+
+.bar.sorted {
+    background-color: var(--bar-sorted) !important;
+}
+
+.bar.pivot {
+    background-color: var(--bar-pivot) !important;
+}
+
+/* ========================================================================
+ * 图例区域
+ * ======================================================================== */
+.legend {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 16px;
+    background-color: var(--bg-container);
+    border-radius: var(--border-radius);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.legend h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-right: 8px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.legend-color.unsorted { background-color: var(--bar-unsorted); }
+.legend-color.comparing { background-color: var(--bar-comparing); }
+.legend-color.swapping   { background-color: var(--bar-swapping); }
+.legend-color.sorted    { background-color: var(--bar-sorted); }
+.legend-color.pivot     { background-color: var(--bar-pivot); }
+
+/* ========================================================================
+ * 响应式设计
+ * 针对不同屏幕尺寸调整布局
+ * ======================================================================== */
+
+/* 平板设备 (max-width: 768px) */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .controls {
+        gap: 16px;
+    }
+
+    input[type="range"] {
+        width: 140px;
+    }
+
+    #visualizer-container {
+        height: 300px;
+        padding: 12px;
+    }
+
+    .status-bar {
+        gap: 12px;
+        font-size: 0.8rem;
+    }
+}
+
+/* 手机设备 (max-width: 480px) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    header h1 {
+        font-size: 1.3rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .control-group.buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    #visualizer-container {
+        height: 250px;
+    }
+
+    .legend {
+        flex-direction: column;
+        gap: 8px;
+    }
+}

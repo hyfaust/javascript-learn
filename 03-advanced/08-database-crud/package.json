@@ -1,0 +1,14 @@
+{
+  "name": "database-crud",
+  "version": "1.0.0",
+  "description": "A CRUD application with SQLite database, supporting both CLI and HTTP modes",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "server": "node server.js",
+    "cli": "node index.js"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.6.0"
+  }
+}

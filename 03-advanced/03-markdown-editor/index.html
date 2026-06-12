@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown 编辑器 - Markdown Editor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 顶部工具栏 -->
+    <div id="toolbar" class="toolbar">
+        <!-- 标题按钮 -->
+        <button class="toolbar-btn" data-action="h1" title="一级标题 (Ctrl+1)">H1</button>
+        <button class="toolbar-btn" data-action="h2" title="二级标题 (Ctrl+2)">H2</button>
+        <button class="toolbar-btn" data-action="h3" title="三级标题 (Ctrl+3)">H3</button>
+
+        <!-- 分隔线 -->
+        <span class="toolbar-separator"></span>
+
+        <!-- 格式按钮 -->
+        <button class="toolbar-btn" data-action="bold" title="粗体 (Ctrl+B)">
+            <strong>B</strong>
+        </button>
+        <button class="toolbar-btn" data-action="italic" title="斜体 (Ctrl+I)">
+            <em>I</em>
+        </button>
+        <button class="toolbar-btn" data-action="strikethrough" title="删除线">
+            <s>S</s>
+        </button>
+
+        <!-- 分隔线 -->
+        <span class="toolbar-separator"></span>
+
+        <!-- 列表按钮 -->
+        <button class="toolbar-btn" data-action="ul" title="无序列表">☰ 列表</button>
+        <button class="toolbar-btn" data-action="ol" title="有序列表">1. 列表</button>
+
+        <!-- 分隔线 -->
+        <span class="toolbar-separator"></span>
+
+        <!-- 插入按钮 -->
+        <button class="toolbar-btn" data-action="link" title="插入链接">🔗 链接</button>
+        <button class="toolbar-btn" data-action="image" title="插入图片">🖼 图片</button>
+        <button class="toolbar-btn" data-action="code" title="行内代码">&lt;/&gt; 代码</button>
+        <button class="toolbar-btn" data-action="codeblock" title="代码块">{ } 代码块</button>
+        <button class="toolbar-btn" data-action="quote" title="引用">❝ 引用</button>
+        <button class="toolbar-btn" data-action="hr" title="水平分割线">--- 分割线</button>
+
+        <!-- 右侧操作按钮 -->
+        <div class="toolbar-right">
+            <span id="saveStatus" class="save-status">已保存</span>
+            <button id="exportBtn" class="export-btn" title="导出为 HTML 文件">导出 HTML</button>
+            <button id="clearBtn" class="clear-btn" title="清空编辑器">清空</button>
+        </div>
+    </div>
+
+    <!-- 主编辑区域 - 左右分栏布局 -->
+    <div id="mainContainer" class="main-container">
+        <!-- 左侧：Markdown 输入区 -->
+        <div class="editor-pane">
+            <div class="pane-header">
+                <span>Markdown 输入</span>
+            </div>
+            <textarea
+                id="editor"
+                class="editor"
+                placeholder="在此输入 Markdown 文本...
+
+支持的语法：
+# 一级标题
+## 二级标题
+**粗体文本**
+*斜体文本*
+- 无序列表项
+1. 有序列表项
+> 引用文本
+`行内代码`
+```代码块```
+[链接文本](URL)
+![图片描述](图片URL)"
+                spellcheck="false"
+            ></textarea>
+        </div>
+
+        <!-- 中间：拖拽分隔条 -->
+        <div id="resizer" class="resizer"></div>
+
+        <!-- 右侧：HTML 预览区 -->
+        <div class="preview-pane">
+            <div class="pane-header">
+                <span>实时预览</span>
+            </div>
+            <div id="preview" class="preview">
+                <!-- 预览内容将通过 JavaScript 动态插入 -->
+                <div class="preview-placeholder">
+                    <p>开始输入 Markdown 以预览效果</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入主要脚本文件 -->
+    <script src="script.js"></script>
+</body>
+</html>

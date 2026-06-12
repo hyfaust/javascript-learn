@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>天气信息模拟器 (Weather Simulator)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- 应用标题 -->
+    <header class="app-header">
+      <h1 class="app-title">天气信息模拟器</h1>
+      <p class="app-subtitle">选择城市，查看天气信息</p>
+    </header>
+    
+    <!-- 城市选择器 -->
+    <section class="city-selector">
+      <label for="city-select">选择城市：</label>
+      <select id="city-select" class="city-dropdown">
+        <!-- 选项会由 JavaScript 动态生成 -->
+      </select>
+    </section>
+    
+    <!-- 天气显示卡片 -->
+    <section id="weather-card" class="weather-card">
+      <!-- 天气图标 -->
+      <div id="weather-icon" class="weather-icon"></div>
+      
+      <!-- 城市名称 -->
+      <h2 id="city-name" class="city-name"></h2>
+      
+      <!-- 温度显示 -->
+      <div class="temperature-section">
+        <span id="temperature" class="temperature"></span>
+        <span class="temperature-unit">°C</span>
+      </div>
+      
+      <!-- 天气状况描述 -->
+      <p id="weather-desc" class="weather-desc"></p>
+      
+      <!-- 详细天气信息网格 -->
+      <div class="details-grid">
+        <!-- 湿度 -->
+        <div class="detail-item">
+          <span class="detail-label">湿度</span>
+          <span id="humidity" class="detail-value"></span>
+        </div>
+        <!-- 风速 -->
+        <div class="detail-item">
+          <span class="detail-label">风速</span>
+          <span id="wind-speed" class="detail-value"></span>
+        </div>
+        <!-- 气压 -->
+        <div class="detail-item">
+          <span class="detail-label">气压</span>
+          <span id="pressure" class="detail-value"></span>
+        </div>
+        <!-- 能见度 -->
+        <div class="detail-item">
+          <span class="detail-label">能见度</span>
+          <span id="visibility" class="detail-value"></span>
+        </div>
+        <!-- 体感温度 -->
+        <div class="detail-item">
+          <span class="detail-label">体感温度</span>
+          <span id="feels-like" class="detail-value"></span>
+        </div>
+        <!-- 紫外线指数 -->
+        <div class="detail-item">
+          <span class="detail-label">紫外线指数</span>
+          <span id="uv-index" class="detail-value"></span>
+        </div>
+      </div>
+      
+      <!-- 建议信息 -->
+      <div id="suggestion" class="suggestion"></div>
+    </section>
+    
+    <!-- 天气预报（未来三天） -->
+    <section class="forecast-section">
+      <h3>未来三天预报</h3>
+      <div id="forecast-container" class="forecast-container">
+        <!-- 预报卡片会由 JavaScript 动态生成 -->
+      </div>
+    </section>
+  </div>
+  
+  <!-- 引用外部 JavaScript 文件 -->
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* 显示屏样式 */
+.display {
+    margin-bottom: 20px;
+}
+
+.display input {
+    width: 100%;
+    padding: 20px;
+    font-size: 32px;
+    text-align: right;
+    border: 3px solid #333;
+    border-radius: 10px;
+    background: #f8f9fa;
+    color: #333;
+}
+
+/* 按钮网格 */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn {
+    padding: 20px;
+    font-size: 24px;
+    border: none;
+    border-radius: 10px;
+    background: #e9ecef;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn:hover {
+    background: #dee2e6;
+    transform: scale(1.05);
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+.operator {
+    background: #667eea;
+    color: white;
+}
+
+.operator:hover {
+    background: #5a6fd6;
+}
+
+.clear {
+    background: #ff6b6b;
+    color: white;
+}
+
+.clear:hover {
+    background: #ee5a5a;
+}
+
+.delete {
+    background: #ffc107;
+    color: white;
+}
+
+.delete:hover {
+    background: #e0a800;
+}
+
+.equals {
+    background: #28a745;
+    color: white;
+    grid-row: span 2;
+}
+
+.equals:hover {
+    background: #218838;
+}
+
+.zero {
+    grid-column: span 2;
+}
+
+/* 历史记录 */
+.history {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 2px solid #eee;
+}
+
+.history h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#historyList {
+    list-style: none;
+    max-height: 150px;
+    overflow-y: auto;
+    margin-bottom: 10px;
+}
+
+#historyList li {
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+    text-align: right;
+}
+
+#clearHistory {
+    width: 100%;
+    padding: 10px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+#clearHistory:hover {
+    background: #5a6268;
+}

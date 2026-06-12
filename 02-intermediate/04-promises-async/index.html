@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise 与 Async/Await 交互式学习</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Promise 与 Async/Await</h1>
+        <p class="subtitle">深入理解 JavaScript 异步编程的核心概念</p>
+    </header>
+
+    <main>
+        <!-- Promise 基础部分 -->
+        <section class="demo-section">
+            <h2>一、Promise 基础</h2>
+
+            <!-- Promise 链式调用 -->
+            <div class="demo-card">
+                <h3>1. Promise 链式调用</h3>
+                <p class="description">使用 .then() 串联多个异步操作</p>
+                <div class="code-block">
+                    <pre>new Promise(resolve => {
+    setTimeout(() => resolve("步骤1完成"), 1000);
+})
+.then(result => {
+    console.log(result);
+    return "步骤2完成";
+})
+.then(result => console.log(result));</pre>
+                </div>
+                <button class="run-btn" onclick="runPromiseChain()">运行演示</button>
+                <div class="result" id="chain-result"></div>
+            </div>
+
+            <!-- async/await 转换 -->
+            <div class="demo-card">
+                <h3>2. Promise 转 Async/Await</h3>
+                <p class="description">用更简洁的语法处理 Promise</p>
+                <div class="code-block">
+                    <pre>// Promise 语法
+fetchData().then(data => console.log(data));
+
+// 等价的 async/await 语法
+async function load() {
+    const data = await fetchData();
+    console.log(data);
+}</pre>
+                </div>
+                <button class="run-btn" onclick="runAsyncAwait()">运行演示</button>
+                <div class="result" id="async-result"></div>
+            </div>
+        </section>
+
+        <!-- Mock Fetch 部分 -->
+        <section class="demo-section">
+            <h2>二、模拟网络请求</h2>
+
+            <!-- Mock Fetch -->
+            <div class="demo-card">
+                <h3>1. 模拟 Fetch 请求</h3>
+                <p class="description">使用 setTimeout 模拟异步网络请求</p>
+                <div class="code-block">
+                    <pre>function mockFetch(url) {
+    return new Promise(resolve => {
+        setTimeout(() => {
+            resolve({ data: "来自 " + url + " 的数据" });
+        }, 1000);
+    });
+}</pre>
+                </div>
+                <button class="run-btn" onclick="runMockFetch()">运行演示</button>
+                <div class="result" id="mock-fetch-result"></div>
+            </div>
+
+            <!-- Try/Catch 错误处理 -->
+            <div class="demo-card">
+                <h3>2. 错误处理：Try/Catch</h3>
+                <p class="description">优雅地处理异步请求中的错误</p>
+                <div class="code-block">
+                    <pre>async function fetchData() {
+    try {
+        const response = await mockFetch("/api/data");
+        console.log("成功:", response);
+    } catch (error) {
+        console.log("失败:", error.message);
+    }
+}</pre>
+                </div>
+                <button class="run-btn" onclick="runErrorHandling()">运行演示</button>
+                <div class="result" id="error-result"></div>
+            </div>
+        </section>
+
+        <!-- Promise.all 部分 -->
+        <section class="demo-section">
+            <h2>三、Promise.all 并行请求</h2>
+
+            <!-- Promise.all 演示 -->
+            <div class="demo-card">
+                <h3>Promise.all 同时发起多个请求</h3>
+                <p class="description">等待所有 Promise 完成后统一处理结果</p>
+                <div class="code-block">
+                    <pre>const [users, posts, comments] = await Promise.all([
+    fetchUsers(),
+    fetchPosts(),
+    fetchComments()
+]);</pre>
+                </div>
+                <button class="run-btn" onclick="runPromiseAll()">运行演示</button>
+                <div class="result" id="promise-all-result"></div>
+            </div>
+        </section>
+
+        <!-- 模拟猫咪图片获取器 -->
+        <section class="demo-section">
+            <h2>四、猫咪图片获取器</h2>
+            <div class="demo-card interactive">
+                <h3>🐱 模拟猫咪图片 API</h3>
+                <p class="description">点击按钮模拟获取猫咪图片的过程，体验异步编程</p>
+
+                <div class="cat-controls">
+                    <div class="input-group">
+                        <label for="cat-count">获取数量：</label>
+                        <select id="cat-count">
+                            <option value="1">1 只猫咪</option>
+                            <option value="3" selected>3 只猫咪</option>
+                            <option value="5">5 只猫咪</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="fetch-method">请求方式：</label>
+                        <select id="fetch-method">
+                            <option value="promise">Promise 链式调用</option>
+                            <option value="async">Async/Await</option>
+                            <option value="all">Promise.all 并行</option>
+                        </select>
+                    </div>
+                    <button class="run-btn cat-btn" onclick="fetchCats()">🐱 获取猫咪</button>
+                </div>
+
+                <div class="loading" id="cat-loading" style="display:none;">
+                    <div class="spinner"></div>
+                    <p>正在获取猫咪图片...</p>
+                </div>
+
+                <div class="result cat-gallery" id="cat-gallery"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>Promise 与 Async/Await 交互式学习 | 掌握异步编程的艺术</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
